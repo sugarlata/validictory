@@ -27,8 +27,9 @@ class FieldValidationError(ValidationError):
     Validation error that refers to a specific field and has `fieldname` and `value` attributes.
     """
     def __init__(self, message, fieldname, value, path=''):
-        message = "Value {0!r} for field '{1}' {2}".format(value, path, message)
-        super(FieldValidationError, self).__init__(message)
+        fmt_message = "Value {0!r} for field '{1}' {2}".format(value, path, message)
+        super(FieldValidationError, self).__init__(fmt_message)
+        self.orig_message = message
         self.fieldname = fieldname
         self.value = value
         self.path = path
